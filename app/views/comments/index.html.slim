@@ -1,0 +1,16 @@
+- unless @comment_items
+  p No Comments
+- else
+  table.table-bordered.table-striped
+    thead
+      th Posted at
+      th Comment
+    tbody
+      - @comment_items.each do |item|
+        = render partial: "detail", locals: { comment: item.comment }
+  
+= form_for "comment", url: "/comments", method: "post" do |f|
+  = f.text_field :text
+  = f.hidden_field :presentation_id, value: 1
+  = f.hidden_field :user_id, value: 1
+  = f.submit "Submit"
