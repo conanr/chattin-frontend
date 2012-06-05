@@ -1,8 +1,7 @@
 class CommentsController < ApplicationController
   def index
     client = open_new_client
-    @comments = client.comments.find_all_by_presentation_id(1)
-    @comment_items = @comments[@comments.size-5..@comments.size-1]
+    @comment_items = client.comments.find_all_by_presentation_id(1).value
   end
 
   def create

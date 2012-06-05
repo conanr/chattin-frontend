@@ -1,16 +1,28 @@
-- unless @comment_items
-  p No Comments
-- else
-  table.table-bordered.table-striped
-    thead
-      th Posted at
-      th Comment
-    tbody
-      - @comment_items.each do |item|
-        = render partial: "detail", locals: { comment: item.comment }
-  
-= form_for "comment", url: "/comments", method: "post" do |f|
-  = f.text_field :text
-  = f.hidden_field :presentation_id, value: 1
-  = f.hidden_field :user_id, value: 1
-  = f.submit "Submit"
+.row-fluid
+  .topper
+    .span6.slide-deck
+      img src="/assets/colors.jpg"
+    .span2
+    .span4.user-list
+      ul.nav.nav-list
+        li.nav-header
+          Users in Chat
+        li.active
+          a href="#"
+            User A
+        li
+          a href="#"
+            User B
+
+.row-fluid.chat
+  .span8
+    table.table
+      tbody#scroller
+        - @comment_items.each do |item|
+          = render partial: "detail", locals: { comment: item.comment }
+  .span4.submit-box
+    = form_for "comment", url: "/comments", method: "post" do |f|
+      = f.text_field :text
+      = f.hidden_field :presentation_id, value: 1
+      = f.hidden_field :user_id, value: 1
+      = f.submit "Submit"
